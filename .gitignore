@@ -1,0 +1,24 @@
+### Project ###
+HELP.md
+
+### Maven ###
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### macOS ###
+.DS_Store
+
+### Logs ###
+*.log
+
+### Backup / Patch Files ###
+*.orig
+
+### Private Working Files ###
+_private/
