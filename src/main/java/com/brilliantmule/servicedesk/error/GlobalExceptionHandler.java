@@ -49,6 +49,9 @@ public class GlobalExceptionHandler {
     /**
      * Handles {@link IncidentStateConflictException} by returning a
      * {@code 409 Conflict} response.
+     * <p>
+     * The response title is {@code "Invalid Incident State"} and the detail
+     * contains the exception message.
      *
      * @param exception the exception thrown when an incident operation conflicts
      *                  with the incident's current lifecycle state
@@ -101,7 +104,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles invalid request parameter values, such as unsupported enum values.
+     * Handles invalid request parameter values, such as unsupported enum constants.
+     * <p>
+     * When the parameter type is an enum, the response includes an
+     * {@code allowedValues} property listing valid options. The response title is
+     * {@code "Invalid Request Parameter"}.
      *
      * @param exception the request parameter type-mismatch exception
      * @return problem details describing the invalid request parameter
@@ -131,8 +138,10 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles request bodies that cannot be deserialized, including malformed JSON
-     * and unsupported enum values.
+     * Handles request bodies that cannot be deserialized.
+     * <p>
+     * This includes malformed JSON and unsupported enum or other invalid field
+     * values. The response title is {@code "Invalid Request Body"}.
      *
      * @param exception the unreadable request-body exception
      * @return problem details describing the invalid request body

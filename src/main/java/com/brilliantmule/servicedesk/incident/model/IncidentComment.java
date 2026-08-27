@@ -9,7 +9,8 @@ import java.time.Instant;
  *
  * @param author    the name or identifier of the person who wrote the comment
  * @param text      the body of the comment
- * @param createdAt the point in time when the comment was created
+ * @param createdAt the point in time when the comment was created; assigned by the
+ *                  server when a comment is added through the API
  */
 @Schema(description = "Represents a comment added to a service desk incident.")
 public record IncidentComment(

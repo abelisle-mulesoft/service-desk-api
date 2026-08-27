@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  *
  * @param name  the reporter's full name
  * @param email the reporter's email address
- * @param phone the reporter's phone number
+ * @param phone the reporter's phone number; may be {@code null}
  */
 @Schema(description = "Contact information for the person who reported an incident.")
 public record Reporter(

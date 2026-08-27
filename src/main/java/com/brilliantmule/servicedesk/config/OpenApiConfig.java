@@ -20,8 +20,8 @@ public class OpenApiConfig {
     /**
      * Provides the top-level OpenAPI definition for the Service Desk API.
      * <p>
-     * Sets the document title, description, and version shown in generated
-     * API documentation.
+     * Sets the document title, description, version, license, and contact
+     * information shown in generated API documentation.
      *
      * @return the configured OpenAPI definition
      */

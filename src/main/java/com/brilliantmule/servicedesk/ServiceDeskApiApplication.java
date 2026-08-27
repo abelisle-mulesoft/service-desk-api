@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Entry point for the Service Desk API Spring Boot application.
+ * <p>
+ * Bootstraps the Spring context and starts the embedded web server.
  */
 @SpringBootApplication
 public class ServiceDeskApiApplication {

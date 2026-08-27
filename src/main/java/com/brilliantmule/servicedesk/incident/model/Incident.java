@@ -308,7 +308,7 @@ public class Incident {
     /**
      * Replaces the comment history for this incident.
      *
-     * @param comments the list of comments
+     * @param comments the list of comments; must not be {@code null}
      */
     public void setComments(List<IncidentComment> comments) {
         this.comments = comments;

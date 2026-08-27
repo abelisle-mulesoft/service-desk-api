@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Application service for service desk incident operations.
  * <p>
- * Coordinates incident operations through {@link IncidentRepository}.
+ * Coordinates incident retrieval, creation, update, assignment, commenting,
+ * resolution, and deletion through {@link IncidentRepository}.
  */
 @Service
 public class IncidentService {
@@ -66,8 +67,8 @@ public class IncidentService {
      * <p>
      * Lookup is case-insensitive.
      *
-     * @param id incident identifier
-     * @return the matching incident, or throws an exception if no incident exists with the identifier
+     * @param id the incident identifier (for example, {@code INC-1001})
+     * @return the matching incident
      * @throws IncidentNotFoundException if no incident exists with the identifier
      */
     public Incident getIncident(String id) {
@@ -111,9 +112,9 @@ public class IncidentService {
      * Updates and persists an existing incident from the given request.
      * <p>
      * Only non-null properties in the request are applied; all others retain their
-     * current values. The identifier, status, reporter, assignment, creation
-     * timestamp, and comments are not modified. The {@code updatedAt} timestamp
-     * is set to the current time when the incident is saved.
+     * current values. At least one editable property must be supplied. The identifier,
+     * status, reporter, assignment, creation timestamp, and comments are not modified.
+     * The {@code updatedAt} timestamp is set to the current time when the incident is saved.
      * <p>
      * Lookup is case-insensitive.
      *
@@ -172,12 +173,14 @@ public class IncidentService {
     /**
      * Adds a comment to an existing incident.
      * <p>
-     * The comment is timestamped when it is added and the incident's
-     * {@code updatedAt} timestamp is advanced. All other incident properties
-     * are preserved.
+     * The comment is timestamped when it is added and appended to the incident's
+     * comment history. The {@code updatedAt} timestamp is refreshed; all other
+     * incident properties are preserved.
+     * <p>
+     * Lookup is case-insensitive.
      *
-     * @param id      the incident identifier
-     * @param request comment request
+     * @param id      the incident identifier (for example, {@code INC-1001})
+     * @param request comment request containing the author and text
      * @return the updated and persisted incident
      * @throws IncidentNotFoundException if no incident exists with the identifier
      */
@@ -235,11 +238,11 @@ public class IncidentService {
     }
 
     /**
-     * Deletes an existing incident.
+     * Permanently deletes an existing incident.
      * <p>
-     * Identifier lookup is case-insensitive.
+     * Lookup is case-insensitive.
      *
-     * @param id the incident identifier
+     * @param id the incident identifier (for example, {@code INC-1001})
      * @throws IncidentNotFoundException if no incident exists with the identifier
      */
     public void deleteIncident(String id) {

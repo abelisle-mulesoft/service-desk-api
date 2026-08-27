@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
  * Only the assignee is supplied; all other incident properties are unchanged by
  * this request.
  *
- * @param assignedTo person or support team to assign the incident to;
+ * @param assignedTo identifier of the person or support team to assign the incident to;
  *                   must not be blank
  */
 @Schema(description = "Information used to assign a service desk incident.")

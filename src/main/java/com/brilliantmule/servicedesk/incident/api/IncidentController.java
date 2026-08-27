@@ -27,7 +27,8 @@ import java.util.List;
  * <p>
  * Base path: {@code /api/incidents}
  * <p>
- * Delegates business logic to {@link IncidentService}.
+ * Exposes endpoints to list, retrieve, create, update, assign, comment on,
+ * resolve, and delete incidents. Delegates business logic to {@link IncidentService}.
  */
 @Tag(
         name = "Incidents",
@@ -370,12 +371,14 @@ public class IncidentController {
     /**
      * Returns incidents matching the supplied optional filters, ordered by identifier ascending.
      * <p>
-     * When no filters are supplied, all incidents are returned.
+     * Responds with {@code 200 OK}. When no filters are supplied, all incidents are returned.
+     * Assignee matching is case-insensitive and excludes unassigned incidents when
+     * {@code assignedTo} is provided.
      *
-     * @param status incident status to match, or {@code null} to include all statuses
-     * @param priority incident priority to match, or {@code null} to include all priorities
-     * @param category incident category to match, or {@code null} to include all categories
-     * @param assignedTo assignee to match, or {@code null} to include all assignments
+     * @param status     incident status to match, or omitted to include all statuses
+     * @param priority   incident priority to match, or omitted to include all priorities
+     * @param category   incident category to match, or omitted to include all categories
+     * @param assignedTo assignee to match, or omitted to include all assignments
      * @return matching incidents; never {@code null}
      */
     @Operation(
@@ -558,9 +561,10 @@ public class IncidentController {
      * Updates an existing incident from the given request.
      * <p>
      * Responds with {@code 200 OK}. Only non-null properties in the request are
-     * applied; all others retain their current values. The identifier, status,
-     * reporter, assignment, comments, and creation timestamp are not modified.
-     * The {@code updatedAt} timestamp is refreshed when the incident is saved.
+     * applied; all others retain their current values. At least one editable
+     * property must be supplied. The identifier, status, reporter, assignment,
+     * comments, and creation timestamp are not modified. The {@code updatedAt}
+     * timestamp is refreshed when the incident is saved.
      * <p>
      * Identifier lookup is case-insensitive.
      *
@@ -876,9 +880,12 @@ public class IncidentController {
     }
 
     /**
-     * Deletes an existing incident.
+     * Permanently deletes an existing incident.
+     * <p>
+     * Responds with {@code 204 No Content} when the incident is deleted.
+     * Identifier lookup is case-insensitive.
      *
-     * @param id the incident identifier
+     * @param id the incident identifier (for example, {@code INC-1001})
      */
     @Operation(
             summary = "Delete an incident",

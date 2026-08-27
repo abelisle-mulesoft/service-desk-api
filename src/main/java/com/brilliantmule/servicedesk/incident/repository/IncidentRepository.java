@@ -113,6 +113,8 @@ public class IncidentRepository {
 
     /**
      * Stores the given incident, replacing any existing entry with the same identifier.
+     * <p>
+     * The incident is indexed by its identifier for case-insensitive lookup.
      *
      * @param incident the incident to store; must have a non-null identifier
      * @return the stored incident
