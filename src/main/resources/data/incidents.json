@@ -1,0 +1,502 @@
+[
+  {
+    "id": "INC-1001",
+    "title": "Unable to access payroll",
+    "description": "User receives an access denied message when opening the payroll application.",
+    "status": "OPEN",
+    "priority": "HIGH",
+    "category": "ACCESS",
+    "reportedBy": {
+      "name": "Jane Smith",
+      "email": "jane.smith@brilliant-mule.com",
+      "phone": "425-555-0101"
+    },
+    "assignedTo": null,
+    "createdAt": "2026-08-25T15:00:00Z",
+    "updatedAt": "2026-08-25T15:00:00Z",
+    "comments": []
+  },
+  {
+    "id": "INC-1002",
+    "title": "VPN disconnects frequently",
+    "description": "VPN connection drops several times during the workday.",
+    "status": "IN_PROGRESS",
+    "priority": "MEDIUM",
+    "category": "NETWORK",
+    "reportedBy": {
+      "name": "Robert Chen",
+      "email": "robert.chen@brilliant-mule.com",
+      "phone": "425-555-0102"
+    },
+    "assignedTo": "Network Support",
+    "createdAt": "2026-08-24T18:30:00Z",
+    "updatedAt": "2026-08-25T14:15:00Z",
+    "comments": []
+  },
+  {
+    "id": "INC-1003",
+    "title": "Laptop docking station not detecting monitors",
+    "description": "Both external monitors remain blank after the laptop is connected to the docking station.",
+    "status": "IN_PROGRESS",
+    "priority": "HIGH",
+    "category": "HARDWARE",
+    "reportedBy": {
+      "name": "Maria Gonzalez",
+      "email": "maria.gonzalez@brilliant-mule.com",
+      "phone": "425-555-0103"
+    },
+    "assignedTo": "Desktop Support",
+    "createdAt": "2026-08-23T16:20:00Z",
+    "updatedAt": "2026-08-24T17:05:00Z",
+    "comments": [
+      {
+        "author": "David Kim",
+        "text": "Confirmed that the laptop detects the docking station but does not enumerate either external display.",
+        "createdAt": "2026-08-24T17:05:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1004",
+    "title": "Order management application fails during startup",
+    "description": "The order management desktop application closes immediately after the user signs in.",
+    "status": "RESOLVED",
+    "priority": "CRITICAL",
+    "category": "SOFTWARE",
+    "reportedBy": {
+      "name": "Emily Johnson",
+      "email": "emily.johnson@brilliant-mule.com",
+      "phone": "425-555-0104"
+    },
+    "assignedTo": "Application Support",
+    "createdAt": "2026-08-22T14:10:00Z",
+    "updatedAt": "2026-08-23T19:45:00Z",
+    "comments": [
+      {
+        "author": "Application Support",
+        "text": "Issue reproduced after the latest desktop client update.",
+        "createdAt": "2026-08-22T16:25:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Rolled back the affected client component and confirmed successful application startup.",
+        "createdAt": "2026-08-23T19:45:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1005",
+    "title": "Conference room display shows incorrect meeting schedule",
+    "description": "The lobby conference room display is showing yesterday's meetings instead of the current schedule.",
+    "status": "RESOLVED",
+    "priority": "LOW",
+    "category": "OTHER",
+    "reportedBy": {
+      "name": "Michael Thompson",
+      "email": "michael.thompson@brilliant-mule.com",
+      "phone": "425-555-0105"
+    },
+    "assignedTo": "Service Desk",
+    "createdAt": "2026-08-21T17:00:00Z",
+    "updatedAt": "2026-08-21T18:15:00Z",
+    "comments": [
+      {
+        "author": "Service Desk",
+        "text": "Restarted the room scheduling display and confirmed that the current calendar is now synchronized.",
+        "createdAt": "2026-08-21T18:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1006",
+    "title": "Intermittent connectivity to warehouse wireless network",
+    "description": "Handheld inventory devices periodically lose connectivity in the north section of the warehouse.",
+    "status": "RESOLVED",
+    "priority": "HIGH",
+    "category": "NETWORK",
+    "reportedBy": {
+      "name": "Sarah Patel",
+      "email": "sarah.patel@brilliant-mule.com",
+      "phone": "425-555-0106"
+    },
+    "assignedTo": "Infrastructure Operations",
+    "createdAt": "2026-08-20T15:35:00Z",
+    "updatedAt": "2026-08-22T20:10:00Z",
+    "comments": [
+      {
+        "author": "Infrastructure Operations",
+        "text": "Wireless survey identified weak coverage near the north loading area.",
+        "createdAt": "2026-08-21T17:30:00Z"
+      },
+      {
+        "author": "Infrastructure Operations",
+        "text": "Adjusted access point power levels and verified stable connectivity throughout the affected area.",
+        "createdAt": "2026-08-22T20:10:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1007",
+    "title": "Executive laptop shuts down unexpectedly",
+    "description": "Laptop powers off without warning several times per day even when connected to AC power.",
+    "status": "IN_PROGRESS",
+    "priority": "CRITICAL",
+    "category": "HARDWARE",
+    "reportedBy": {
+      "name": "Christopher Lee",
+      "email": "christopher.lee@brilliant-mule.com",
+      "phone": "425-555-0107"
+    },
+    "assignedTo": "Endpoint Engineering",
+    "createdAt": "2026-08-25T13:05:00Z",
+    "updatedAt": "2026-08-26T16:40:00Z",
+    "comments": [
+      {
+        "author": "Endpoint Engineering",
+        "text": "Collected hardware diagnostics and operating system event logs for analysis.",
+        "createdAt": "2026-08-25T16:20:00Z"
+      },
+      {
+        "author": "Endpoint Engineering",
+        "text": "Diagnostics indicate a possible battery or power-management hardware fault. Replacement device is being prepared.",
+        "createdAt": "2026-08-26T16:40:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1008",
+    "title": "Teams notifications delayed on desktop",
+    "description": "Desktop notifications for new Teams messages sometimes appear several minutes after the messages arrive.",
+    "status": "IN_PROGRESS",
+    "priority": "LOW",
+    "category": "SOFTWARE",
+    "reportedBy": {
+      "name": "Laura Martinez",
+      "email": "laura.martinez@brilliant-mule.com",
+      "phone": "425-555-0108"
+    },
+    "assignedTo": "Collaboration Support",
+    "createdAt": "2026-08-24T21:15:00Z",
+    "updatedAt": "2026-08-26T18:05:00Z",
+    "comments": [
+      {
+        "author": "Collaboration Support",
+        "text": "Issue appears limited to the desktop client; web notifications arrive normally.",
+        "createdAt": "2026-08-26T18:05:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1009",
+    "title": "Shipping label printer produces faded barcodes",
+    "description": "Shipping labels print successfully, but barcode quality is too poor for reliable scanning.",
+    "status": "RESOLVED",
+    "priority": "HIGH",
+    "category": "OTHER",
+    "reportedBy": {
+      "name": "Daniel Wilson",
+      "email": "daniel.wilson@brilliant-mule.com",
+      "phone": "425-555-0109"
+    },
+    "assignedTo": "Workplace Technology",
+    "createdAt": "2026-08-19T19:40:00Z",
+    "updatedAt": "2026-08-20T16:55:00Z",
+    "comments": [
+      {
+        "author": "Workplace Technology",
+        "text": "Replaced the printer ribbon and recalibrated print density.",
+        "createdAt": "2026-08-20T16:30:00Z"
+      },
+      {
+        "author": "Daniel Wilson",
+        "text": "Confirmed that newly printed labels scan correctly.",
+        "createdAt": "2026-08-20T16:55:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1010",
+    "title": "High latency between distribution center and ERP system",
+    "description": "Warehouse users experience long response times when submitting inventory transactions to the ERP system.",
+    "status": "RESOLVED",
+    "priority": "CRITICAL",
+    "category": "NETWORK",
+    "reportedBy": {
+      "name": "Amanda Brown",
+      "email": "amanda.brown@brilliant-mule.com",
+      "phone": "425-555-0110"
+    },
+    "assignedTo": "Infrastructure Operations",
+    "createdAt": "2026-08-18T14:25:00Z",
+    "updatedAt": "2026-08-19T22:10:00Z",
+    "comments": [
+      {
+        "author": "Infrastructure Operations",
+        "text": "Network monitoring identified packet loss on the primary WAN circuit.",
+        "createdAt": "2026-08-18T18:45:00Z"
+      },
+      {
+        "author": "Infrastructure Operations",
+        "text": "Traffic was moved to the secondary circuit while the carrier investigated the primary connection.",
+        "createdAt": "2026-08-18T20:30:00Z"
+      },
+      {
+        "author": "Infrastructure Operations",
+        "text": "Carrier repaired the circuit and traffic was restored to the primary path. ERP response times returned to normal.",
+        "createdAt": "2026-08-19T22:10:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1011",
+    "title": "Employee profile displays incorrect personal information",
+    "description": "Employee reports that the HR portal displays an incorrect mailing address and date of birth.",
+    "status": "IN_PROGRESS",
+    "priority": "MEDIUM",
+    "category": "ACCESS",
+    "reportedBy": {
+      "name": "Rachel Adams",
+      "email": "rachel.adams@brilliant-mule.com",
+      "phone": "425-555-0111"
+    },
+    "assignedTo": "HR Systems Support",
+    "createdAt": "2026-08-26T15:30:00Z",
+    "updatedAt": "2026-08-27T14:20:00Z",
+    "comments": [
+      {
+        "author": "Rachel Adams",
+        "text": "My employee ID is BM-48217. The portal shows my address as 123 Example Ave, Kirkland, WA 98033 and my date of birth as 1984-07-19. Please verify the profile data.",
+        "createdAt": "2026-08-26T15:35:00Z"
+      },
+      {
+        "author": "HR Systems Support",
+        "text": "Profile data has been escalated to the HR application team for validation against the authoritative employee record.",
+        "createdAt": "2026-08-27T14:20:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1012",
+    "title": "Benefits application cannot verify employee identity",
+    "description": "Employee receives an identity verification error when attempting to enroll in benefits.",
+    "status": "IN_PROGRESS",
+    "priority": "HIGH",
+    "category": "ACCESS",
+    "reportedBy": {
+      "name": "Kevin Morgan",
+      "email": "kevin.morgan@brilliant-mule.com",
+      "phone": "425-555-0112"
+    },
+    "assignedTo": "HR Systems Support",
+    "createdAt": "2026-08-27T13:10:00Z",
+    "updatedAt": "2026-08-27T15:45:00Z",
+    "comments": [
+      {
+        "author": "Kevin Morgan",
+        "text": "The benefits site asks me to verify the last four digits of my SSN. My test profile contains SSN 000-12-3456, but verification still fails.",
+        "createdAt": "2026-08-27T13:15:00Z"
+      },
+      {
+        "author": "HR Systems Support",
+        "text": "Confirmed that the identity attributes being received by the benefits application do not match the employee profile.",
+        "createdAt": "2026-08-27T15:45:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1013",
+    "title": "Intermittent payment processing failures during peak hours",
+    "description": "Customer service representatives intermittently receive timeout errors when submitting credit card payments through the customer account application. The issue occurs primarily during peak business hours and cannot be reproduced consistently.",
+    "status": "RESOLVED",
+    "priority": "CRITICAL",
+    "category": "SOFTWARE",
+    "reportedBy": {
+      "name": "Jennifer Taylor",
+      "email": "jennifer.taylor@brilliant-mule.com",
+      "phone": "425-555-0113"
+    },
+    "assignedTo": "Application Support",
+    "createdAt": "2026-08-03T15:12:00Z",
+    "updatedAt": "2026-08-14T22:35:00Z",
+    "comments": [
+      {
+        "author": "Jennifer Taylor",
+        "text": "Several customer service representatives are reporting payment submission failures. The application displays a timeout message after approximately 30 seconds. Retrying the same payment usually succeeds.",
+        "createdAt": "2026-08-03T15:18:00Z"
+      },
+      {
+        "author": "Service Desk",
+        "text": "Confirmed reports from users in both the Seattle and Denver offices. No general network outage or application availability issue is currently reported.",
+        "createdAt": "2026-08-03T15:32:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Application health dashboards show all instances running normally. Initial review of application logs shows several downstream payment service requests exceeding the configured 30-second timeout.",
+        "createdAt": "2026-08-03T16:05:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Compared successful and failed transactions. Failed requests reach the payment integration service but do not receive a response before the client timeout expires.",
+        "createdAt": "2026-08-03T17:20:00Z"
+      },
+      {
+        "author": "Integration Support",
+        "text": "Integration service CPU and memory utilization remain within normal ranges. No deployment or configuration changes were made during the previous seven days.",
+        "createdAt": "2026-08-03T18:10:00Z"
+      },
+      {
+        "author": "Integration Support",
+        "text": "Transaction tracing indicates that most of the elapsed time occurs while waiting for a response from the external payment processor. Successful requests typically complete in under two seconds.",
+        "createdAt": "2026-08-03T19:25:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Incident escalated to the payment processor support team with timestamps and correlation identifiers for five failed transactions. No customer card data was included in the escalation.",
+        "createdAt": "2026-08-03T20:05:00Z"
+      },
+      {
+        "author": "Payment Processor Support",
+        "text": "Processor reports no service-wide incident during the supplied timeframe. Their operations team is reviewing the individual transaction traces.",
+        "createdAt": "2026-08-04T14:40:00Z"
+      },
+      {
+        "author": "Jennifer Taylor",
+        "text": "Users report normal payment processing this morning. Yesterday's failures were most noticeable between 9:00 AM and noon Pacific time.",
+        "createdAt": "2026-08-04T16:15:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "No failures observed during morning testing. Incident will remain open because the intermittent behavior has not been explained and previous failures were concentrated during higher transaction volume.",
+        "createdAt": "2026-08-04T18:30:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Payment timeouts returned shortly after transaction volume increased. Twelve failures were recorded between 10:05 AM and 10:40 AM Pacific time.",
+        "createdAt": "2026-08-05T17:55:00Z"
+      },
+      {
+        "author": "Integration Support",
+        "text": "Added temporary diagnostic logging around outbound payment requests. The additional logging records request duration, connection acquisition time, response status, and correlation identifier.",
+        "createdAt": "2026-08-05T19:10:00Z"
+      },
+      {
+        "author": "Integration Support",
+        "text": "New diagnostics show some requests waiting several seconds to obtain an outbound HTTP connection before the request is sent to the payment processor. Connection pool utilization is substantially higher during the failure window.",
+        "createdAt": "2026-08-06T17:20:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Reviewed connection pool configuration with the platform team. The current maximum was established when transaction volume was significantly lower and may no longer be appropriate for peak traffic.",
+        "createdAt": "2026-08-06T18:45:00Z"
+      },
+      {
+        "author": "Platform Engineering",
+        "text": "Historical metrics confirm that outbound connection pool utilization approaches the configured maximum during peak periods. No similar saturation occurs outside business hours.",
+        "createdAt": "2026-08-07T15:30:00Z"
+      },
+      {
+        "author": "Platform Engineering",
+        "text": "Prepared a configuration change to increase the outbound connection pool capacity. Change will be applied in the staging environment first and validated with a representative load test.",
+        "createdAt": "2026-08-07T17:05:00Z"
+      },
+      {
+        "author": "Quality Engineering",
+        "text": "Completed baseline load test in staging using the existing connection pool configuration. Timeout behavior was reproduced when concurrent payment requests exceeded normal operating levels.",
+        "createdAt": "2026-08-08T16:40:00Z"
+      },
+      {
+        "author": "Platform Engineering",
+        "text": "Applied the proposed connection pool configuration in staging. No payment timeouts occurred during a repeat of the same load test, and connection acquisition time remained below 100 milliseconds.",
+        "createdAt": "2026-08-08T19:15:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Staging results support connection pool saturation as the likely cause. Production change has been submitted for approval. Diagnostic logging will remain enabled until production validation is complete.",
+        "createdAt": "2026-08-08T20:05:00Z"
+      },
+      {
+        "author": "Change Management",
+        "text": "Production configuration change approved for the scheduled maintenance window on August 10. Application Support and Platform Engineering will validate payment processing immediately after the change.",
+        "createdAt": "2026-08-09T14:25:00Z"
+      },
+      {
+        "author": "Platform Engineering",
+        "text": "Production outbound connection pool capacity increased successfully. All application instances restarted normally and passed post-change health checks.",
+        "createdAt": "2026-08-10T08:45:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Completed post-change functional testing with successful payment submissions across all application instances. No errors observed.",
+        "createdAt": "2026-08-10T09:20:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "First peak-period monitoring window completed. Payment volume reached expected weekday levels with no timeout errors. Connection pool utilization remained below 60 percent.",
+        "createdAt": "2026-08-10T19:05:00Z"
+      },
+      {
+        "author": "Jennifer Taylor",
+        "text": "Customer service supervisors confirmed that no payment timeout complaints were received during today's peak period.",
+        "createdAt": "2026-08-10T21:15:00Z"
+      },
+      {
+        "author": "Integration Support",
+        "text": "Second day of monitoring shows no requests exceeding the client timeout. Outbound connection acquisition times remain stable even during the highest observed transaction volume.",
+        "createdAt": "2026-08-11T20:30:00Z"
+      },
+      {
+        "author": "Payment Processor Support",
+        "text": "Processor completed its review and found no evidence of abnormal processing latency on its platform during the original incidents. Their findings are consistent with the connection saturation identified internally.",
+        "createdAt": "2026-08-12T16:10:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Third consecutive business day completed without a payment timeout. Temporary diagnostic logging has been returned to the standard production level.",
+        "createdAt": "2026-08-12T22:05:00Z"
+      },
+      {
+        "author": "Platform Engineering",
+        "text": "Added connection pool utilization and connection acquisition latency to the permanent application monitoring dashboard. Alert thresholds have been configured to provide early warning before pool exhaustion.",
+        "createdAt": "2026-08-13T18:25:00Z"
+      },
+      {
+        "author": "Application Support",
+        "text": "Root cause confirmed as insufficient outbound HTTP connection pool capacity during peak payment volume. Increased pool capacity resolved the timeout condition, and additional monitoring is now in place.",
+        "createdAt": "2026-08-14T20:10:00Z"
+      },
+      {
+        "author": "Jennifer Taylor",
+        "text": "Customer service leadership confirmed normal payment processing throughout the week. No additional timeout reports have been received. Incident can be resolved.",
+        "createdAt": "2026-08-14T22:35:00Z"
+      }
+    ]
+  },
+  {
+    "id": "INC-1014",
+    "title": "Retired application access request",
+    "description": "User requested access to an application that has been retired and is no longer available.",
+    "status": "CLOSED",
+    "priority": "LOW",
+    "category": "ACCESS",
+    "reportedBy": {
+      "name": "Mark Reynolds",
+      "email": "mark.reynolds@brilliant-mule.com",
+      "phone": "425-555-0114"
+    },
+    "assignedTo": "Service Desk",
+    "createdAt": "2026-08-15T16:10:00Z",
+    "updatedAt": "2026-08-16T18:25:00Z",
+    "comments": [
+      {
+        "author": "Service Desk",
+        "text": "Confirmed that the requested application was retired and is no longer available for access.",
+        "createdAt": "2026-08-16T17:40:00Z"
+      },
+      {
+        "author": "Service Desk",
+        "text": "User was informed of the replacement process and the incident was closed.",
+        "createdAt": "2026-08-16T18:25:00Z"
+      }
+    ]
+  }
+]
