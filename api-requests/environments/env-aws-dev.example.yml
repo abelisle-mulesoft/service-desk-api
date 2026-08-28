@@ -1,4 +1,4 @@
-name: aws-dev-example
+name: env-aws-dev-example
 variables:
   - name: baseUrl
     value: http://<ec2-hostname>:8080

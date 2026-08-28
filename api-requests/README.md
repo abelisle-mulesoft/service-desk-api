@@ -1,6 +1,6 @@
 # API Requests
 
-This directory contains a reusable collection of requests for exploring and testing the Brilliant Mule Service Desk API.
+This directory contains a reusable collection of requests for exploring and testing the Brilliant Mule Service Desk API and its gateway-managed endpoints.
 
 The collection is designed to be used with [Bruno](https://www.usebruno.com/) and uses the [OpenCollection](https://www.opencollection.com/) format. The request artifacts are stored as text files alongside the application source so they can be versioned with the API.
 
@@ -16,6 +16,7 @@ Switching environments allows the same requests to be executed against different
 api-requests/
 ├── environments/
 ├── errors/
+├── gateway/
 ├── incidents/
 ├── README.md
 └── opencollection.yml
@@ -23,6 +24,7 @@ api-requests/
 
 - `environments/` — environment definitions and example environment templates.
 - `incidents/` — standard incident operations and behavioral scenarios.
+- `gateway/` — requests for validating gateway policies and behavior.
 - `errors/` — validation and error-response scenarios.
 - `opencollection.yml` — OpenCollection metadata, collection variables, and collection-level configuration.
 
@@ -64,15 +66,13 @@ The same approach can be used for additional environments, such as Omni Gateway,
 
 ### `baseUrl`
 
-All requests use the `baseUrl` environment variable to identify the target Service Desk API.
+All requests use the `baseUrl` environment variable to identify the target Service Desk API. The value depends on the selected environment. For a local or direct AWS deployment, `baseUrl` points directly to the Service Desk API. When the API is managed through a gateway, `baseUrl` points to the gateway endpoint and includes any API base path required by the gateway configuration. Changing the selected environment changes `baseUrl` without requiring changes to individual requests.
 
 For example:
 
 ```text
 http://localhost:8080
 ```
-
-Changing the selected environment changes `baseUrl` without requiring changes to individual requests.
 
 ## Canonical Seed Incidents
 
@@ -100,6 +100,19 @@ The `Create incident` request sets `createdIncidentId` to the generated incident
 The `incidents` directory contains requests for the normal Service Desk API operations, including listing, retrieving, filtering, creating, updating, assigning, commenting on, resolving, and deleting incidents.
 
 It also contains behavioral scenarios where a successful response depends on a particular incident state, such as resolving an already-resolved incident.
+
+### Gateway
+
+The `gateway` directory contains requests for validating behavior introduced by an API gateway rather than by the Service Desk API itself.
+
+The current requests validate:
+
+- Requests with valid client credentials.
+- Requests with missing client credentials.
+- Requests with invalid client credentials.
+- Rate limiting.
+
+Gateway policies that do not require a specialized request, such as header injection, can be validated using the existing API requests with the appropriate gateway environment selected.
 
 ### Errors
 

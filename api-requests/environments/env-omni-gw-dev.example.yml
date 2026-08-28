@@ -1,0 +1,5 @@
+name: env-omni-gw-dev-example
+variables:
+  - name: baseUrl
+    value: https://<omni-gateway-endpoint>/<api-base-path>
+    description: ""
