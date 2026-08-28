@@ -1,0 +1,43 @@
+opencollection: 1.0.0
+
+info:
+  name: Brilliant Mule Service Desk API
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  variables:
+    - name: openIncidentId
+      value: INC-1001
+    - name: resolvedIncidentId
+      value: INC-1004
+    - name: commentHistoryIncidentId
+      value: INC-1013
+    - name: closedIncidentId
+      value: INC-1014
+    - name: createdIncidentId
+      value: INC-1016
+
+docs:
+  content: |
+    # Brilliant Mule Service Desk API
+
+    Requests for exploring and testing the Brilliant Mule Service Desk API.
+
+    Select the appropriate environment before sending requests.
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

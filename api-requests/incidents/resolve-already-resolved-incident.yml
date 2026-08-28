@@ -1,0 +1,25 @@
+info:
+  name: Resolve already-resolved incident
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/incidents/{{resolvedIncidentId}}/resolve"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 200", function () { expect(res.getStatus()).to.equal(200); });
+        test("Incident remains resolved", function () { expect(res.getBody().status).to.eql("RESOLVED"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Idempotency check. updatedAt should remain unchanged.

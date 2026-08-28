@@ -1,0 +1,35 @@
+info:
+  name: Add incident comment
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/incidents/{{createdIncidentId}}/comments"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "author": "John Davis",
+        "text": "User confirmed the issue is still occurring."
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 200", function () { expect(res.getStatus()).to.equal(200); });
+        test("Comment appended", function () { expect(res.getBody().comments.length).to.be.above(0); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Run Create incident first so `createdIncidentId` is populated.

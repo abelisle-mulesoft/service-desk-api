@@ -1,0 +1,25 @@
+info:
+  name: Resolve incident
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/incidents/{{createdIncidentId}}/resolve"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 200", function () { expect(res.getStatus()).to.equal(200); });
+        test("Incident is resolved", function () { expect(res.getBody().status).to.eql("RESOLVED"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Run Create incident first so `createdIncidentId` is populated.

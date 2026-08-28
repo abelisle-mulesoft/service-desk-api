@@ -1,0 +1,25 @@
+info:
+  name: Invalid status query parameter
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/incidents?status=open"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 400", function () { expect(res.getStatus()).to.equal(400); });
+        test("Problem title", function () { expect(res.getBody().title).to.eql("Invalid Request Parameter"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Expected: 400 Invalid Request Parameter."

@@ -1,24 +1,50 @@
-### Project ###
-HELP.md
+# ======================================
+# Project: service-desk-api
+# ======================================
 
-### Maven ###
-target/
-.mvn/wrapper/maven-wrapper.jar
+# --------------------------------------
+# macOS / OS noise
+# --------------------------------------
+.DS_Store
 
-### IntelliJ IDEA ###
+# --------------------------------------
+# IntelliJ IDEA
+# --------------------------------------
 .idea/
 *.iws
 *.iml
 *.ipr
 
-### macOS ###
-.DS_Store
+# --------------------------------------
+# Java / Maven / Spring artifacts
+# --------------------------------------
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
 
-### Logs ###
+# --------------------------------------
+# Logs
+# --------------------------------------
 *.log
+logs/
 
-### Backup / Patch Files ###
+# --------------------------------------
+# Temporary / Backup / Patch Files
+# --------------------------------------
 *.orig
+*.tmp
+*.swp
+*.swo
+*.bak
+*~
 
-### Private Working Files ###
+# --------------------------------------
+# API Request Environments
+# --------------------------------------
+api-requests/environments/env-*.yml
+!api-requests/environments/env-*.example.yml
+
+# --------------------------------------
+# Private / local-only content
+# --------------------------------------
 _private/

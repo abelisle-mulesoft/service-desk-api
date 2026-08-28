@@ -1,0 +1,23 @@
+info:
+  name: Delete incident
+  type: http
+  seq: 11
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/api/incidents/{{createdIncidentId}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: test("Status code is 204", function () { expect(res.getStatus()).to.equal(204); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Run Create incident first so `createdIncidentId` is populated.

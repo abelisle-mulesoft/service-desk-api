@@ -1,0 +1,42 @@
+info:
+  name: Create incident
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/incidents"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Unable to access payroll",
+        "description": "User receives an access denied message when opening the payroll application.",
+        "priority": "HIGH",
+        "category": "ACCESS",
+        "reportedBy": {
+          "name": "Jane Smith",
+          "email": "jane.smith@brilliant-mule.com",
+          "phone": "425-555-0199"
+        }
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 201", function () { expect(res.getStatus()).to.equal(201); });
+        const body = res.getBody();
+        bru.setCollectionVar("createdIncidentId", body.id);
+        test("Created incident is OPEN", function () { expect(body.status).to.eql("OPEN"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,25 @@
+info:
+  name: Resolve closed incident
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/incidents/{{closedIncidentId}}/resolve"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 409", function () { expect(res.getStatus()).to.equal(409); });
+        test("Problem title", function () { expect(res.getBody().title).to.eql("Invalid Incident State"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Expected: 409 Invalid Incident State."

@@ -1,0 +1,35 @@
+info:
+  name: Update incident
+  type: http
+  seq: 7
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/api/incidents/{{createdIncidentId}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Unable to access payroll application",
+        "priority": "CRITICAL"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 200", function () { expect(res.getStatus()).to.equal(200); });
+        test("Priority updated", function () { expect(res.getBody().priority).to.eql("CRITICAL"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Run Create incident first so `createdIncidentId` is populated.

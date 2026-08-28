@@ -1,0 +1,34 @@
+info:
+  name: Invalid update enum
+  type: http
+  seq: 3
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/api/incidents/{{openIncidentId}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "priority": "URGENT"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Status code is 400", function () { expect(res.getStatus()).to.equal(400); });
+        test("Problem title", function () { expect(res.getBody().title).to.eql("Invalid Request Body"); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Expected: 400 Invalid Request Body."

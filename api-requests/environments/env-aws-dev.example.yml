@@ -1,0 +1,5 @@
+name: aws-dev-example
+variables:
+  - name: baseUrl
+    value: http://<ec2-hostname>:8080
+    description: ""
