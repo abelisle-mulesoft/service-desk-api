@@ -1,0 +1,874 @@
+openapi: 3.0.1
+info:
+  title: Brilliant Mule Service Desk API
+  description: REST API for managing Brilliant Mule service desk incidents.
+  contact:
+    name: Alan Belisle
+    email: abelisle@salesforce.com
+  license:
+    name: Apache License 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+tags:
+- name: Incidents
+  description: Operations for managing service desk incidents
+paths:
+  /api/incidents:
+    get:
+      tags:
+      - Incidents
+      summary: List incidents
+      description: "Returns service desk incidents, optionally filtered by status,\
+        \ priority, category, or assignee."
+      operationId: getIncidents
+      parameters:
+      - name: status
+        in: query
+        description: Incident status to match.
+        required: false
+        schema:
+          type: string
+          description: Current lifecycle status of a service desk incident.
+          enum:
+          - OPEN
+          - IN_PROGRESS
+          - RESOLVED
+          - CLOSED
+        example: OPEN
+      - name: priority
+        in: query
+        description: Incident priority to match.
+        required: false
+        schema:
+          type: string
+          description: Priority level assigned to a service desk incident.
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        example: HIGH
+      - name: category
+        in: query
+        description: Incident category to match.
+        required: false
+        schema:
+          type: string
+          description: Category used to classify a service desk incident.
+          enum:
+          - ACCESS
+          - HARDWARE
+          - NETWORK
+          - SOFTWARE
+          - OTHER
+        example: ACCESS
+      - name: assignedTo
+        in: query
+        description: Person or support team assigned to the incident.
+        required: false
+        schema:
+          type: string
+        example: Network Support
+      responses:
+        "200":
+          description: Incidents returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Incident"
+              examples:
+                Incident list:
+                  description: Incident list
+                  value:
+                  - id: INC-1001
+                    title: Unable to access payroll
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: OPEN
+                    priority: HIGH
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: null
+                    createdAt: 2026-08-25T15:00:00Z
+                    updatedAt: 2026-08-25T15:00:00Z
+                    comments: []
+                  - id: INC-1002
+                    title: VPN disconnects frequently
+                    description: VPN connection drops several times during the workday.
+                    status: IN_PROGRESS
+                    priority: MEDIUM
+                    category: NETWORK
+                    reportedBy:
+                      name: Robert Chen
+                      email: robert.chen@brilliant-mule.com
+                      phone: 425-555-0102
+                    assignedTo: Network Support
+                    createdAt: 2026-08-24T18:30:00Z
+                    updatedAt: 2026-08-25T14:15:00Z
+                    comments: []
+        "400":
+          description: Invalid query parameter
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Invalid request parameter:
+                  description: Invalid request parameter
+                  value:
+                    type: about:blank
+                    title: Invalid Request Parameter
+                    status: 400
+                    detail: Invalid value 'open' for parameter 'status'.
+                    instance: /api/incidents
+                    allowedValues:
+                    - OPEN
+                    - IN_PROGRESS
+                    - RESOLVED
+                    - CLOSED
+    post:
+      tags:
+      - Incidents
+      summary: Create an incident
+      description: Creates a new service desk incident.
+      operationId: createIncident
+      requestBody:
+        description: Incident to create.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIncidentRequest"
+            examples:
+              Create incident:
+                description: Create incident
+                value:
+                  title: Unable to access payroll
+                  description: User receives an access denied message when opening
+                    the payroll application.
+                  priority: HIGH
+                  category: ACCESS
+                  reportedBy:
+                    name: Jane Smith
+                    email: jane.smith@brilliant-mule.com
+                    phone: 425-555-0101
+        required: true
+      responses:
+        "201":
+          description: Incident created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+              examples:
+                Created incident:
+                  description: Created incident
+                  value:
+                    id: INC-1015
+                    title: Unable to access payroll
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: OPEN
+                    priority: HIGH
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: null
+                    createdAt: 2026-08-27T18:00:00Z
+                    updatedAt: 2026-08-27T18:00:00Z
+                    comments: []
+        "400":
+          description: Request validation failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Validation failure:
+                  description: Validation failure
+                  value:
+                    type: about:blank
+                    title: Validation Failed
+                    status: 400
+                    detail: The request contains invalid data.
+                    instance: /api/incidents
+                    errors:
+                    - "title: must not be blank"
+                    - "reportedBy.email: must be a well-formed email address"
+  /api/incidents/{id}/resolve:
+    post:
+      tags:
+      - Incidents
+      summary: Resolve an incident
+      description: Marks an existing service desk incident as resolved.
+      operationId: resolveIncident
+      parameters:
+      - name: id
+        in: path
+        description: Unique incident identifier.
+        required: true
+        schema:
+          type: string
+        example: INC-1001
+      responses:
+        "200":
+          description: Incident resolved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+              examples:
+                Resolved incident:
+                  description: Resolved incident
+                  value:
+                    id: INC-1001
+                    title: Unable to access payroll
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: RESOLVED
+                    priority: HIGH
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: null
+                    createdAt: 2026-08-25T15:00:00Z
+                    updatedAt: 2026-08-26T19:45:00Z
+                    comments: []
+        "404":
+          description: Incident not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Incident not found:
+                  description: Incident not found
+                  value:
+                    type: about:blank
+                    title: Incident Not Found
+                    status: 404
+                    detail: Incident INC-9999 does not exist
+                    instance: /api/incidents/INC-9999/resolve
+        "409":
+          description: Incident cannot be resolved because of its current state
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Invalid incident state:
+                  description: Invalid incident state
+                  value:
+                    type: about:blank
+                    title: Invalid Incident State
+                    status: 409
+                    detail: Incident INC-1014 cannot be resolved because it is CLOSED.
+                    instance: /api/incidents/INC-1014/resolve
+  /api/incidents/{id}/comments:
+    post:
+      tags:
+      - Incidents
+      summary: Add an incident comment
+      description: Adds a comment to an existing service desk incident.
+      operationId: addIncidentComment
+      parameters:
+      - name: id
+        in: path
+        description: Unique incident identifier.
+        required: true
+        schema:
+          type: string
+        example: INC-1001
+      requestBody:
+        description: Comment to add to the incident.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddIncidentCommentRequest"
+            examples:
+              Add incident comment:
+                description: Add incident comment
+                value:
+                  author: John Davis
+                  text: User confirmed the issue is still occurring.
+        required: true
+      responses:
+        "200":
+          description: Comment added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+              examples:
+                Incident with comment:
+                  description: Incident with comment
+                  value:
+                    id: INC-1001
+                    title: Unable to access payroll
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: OPEN
+                    priority: HIGH
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: null
+                    createdAt: 2026-08-25T15:00:00Z
+                    updatedAt: 2026-08-27T17:40:00Z
+                    comments:
+                    - author: John Davis
+                      text: User confirmed the issue is still occurring.
+                      createdAt: 2026-08-27T17:40:00Z
+        "400":
+          description: Request validation failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Validation failure:
+                  description: Validation failure
+                  value:
+                    type: about:blank
+                    title: Validation Failed
+                    status: 400
+                    detail: The request contains invalid data.
+                    instance: /api/incidents/INC-1001/comments
+                    errors:
+                    - "author: must not be blank"
+                    - "text: must not be blank"
+        "404":
+          description: Incident not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Incident not found:
+                  description: Incident not found
+                  value:
+                    type: about:blank
+                    title: Incident Not Found
+                    status: 404
+                    detail: Incident INC-9999 does not exist
+                    instance: /api/incidents/INC-9999/comments
+  /api/incidents/{id}/assign:
+    post:
+      tags:
+      - Incidents
+      summary: Assign an incident
+      description: Assigns an existing service desk incident to a person or support
+        team.
+      operationId: assignIncident
+      parameters:
+      - name: id
+        in: path
+        description: Unique incident identifier.
+        required: true
+        schema:
+          type: string
+        example: INC-1001
+      requestBody:
+        description: Incident assignment.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignIncidentRequest"
+            examples:
+              Assign incident:
+                description: Assign incident
+                value:
+                  assignedTo: Network Support
+        required: true
+      responses:
+        "200":
+          description: Incident assigned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+              examples:
+                Assigned incident:
+                  description: Assigned incident
+                  value:
+                    id: INC-1001
+                    title: Unable to access payroll
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: OPEN
+                    priority: HIGH
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: Network Support
+                    createdAt: 2026-08-25T15:00:00Z
+                    updatedAt: 2026-08-27T17:35:00Z
+                    comments: []
+        "400":
+          description: Request validation failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Validation failure:
+                  description: Validation failure
+                  value:
+                    type: about:blank
+                    title: Validation Failed
+                    status: 400
+                    detail: The request contains invalid data.
+                    instance: /api/incidents/INC-1001/assign
+                    errors:
+                    - "assignedTo: must not be blank"
+        "404":
+          description: Incident not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Incident not found:
+                  description: Incident not found
+                  value:
+                    type: about:blank
+                    title: Incident Not Found
+                    status: 404
+                    detail: Incident INC-9999 does not exist
+                    instance: /api/incidents/INC-9999/assign
+  /api/incidents/{id}:
+    get:
+      tags:
+      - Incidents
+      summary: Get an incident
+      description: Returns a service desk incident by its identifier.
+      operationId: getIncident
+      parameters:
+      - name: id
+        in: path
+        description: Unique incident identifier.
+        required: true
+        schema:
+          type: string
+        example: INC-1001
+      responses:
+        "200":
+          description: Incident returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+              examples:
+                Incident:
+                  description: Incident
+                  value:
+                    id: INC-1001
+                    title: Unable to access payroll
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: OPEN
+                    priority: HIGH
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: null
+                    createdAt: 2026-08-25T15:00:00Z
+                    updatedAt: 2026-08-25T15:00:00Z
+                    comments: []
+        "404":
+          description: Incident not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Incident not found:
+                  description: Incident not found
+                  value:
+                    type: about:blank
+                    title: Incident Not Found
+                    status: 404
+                    detail: Incident INC-9999 does not exist
+                    instance: /api/incidents/INC-9999
+    delete:
+      tags:
+      - Incidents
+      summary: Delete an incident
+      description: Permanently deletes an existing service desk incident.
+      operationId: deleteIncident
+      parameters:
+      - name: id
+        in: path
+        description: Unique incident identifier.
+        required: true
+        schema:
+          type: string
+        example: INC-1001
+      responses:
+        "204":
+          description: Incident deleted successfully
+        "404":
+          description: Incident not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Incident not found:
+                  description: Incident not found
+                  value:
+                    type: about:blank
+                    title: Incident Not Found
+                    status: 404
+                    detail: Incident INC-9999 does not exist
+                    instance: /api/incidents/INC-9999
+    patch:
+      tags:
+      - Incidents
+      summary: Update an incident
+      description: Updates one or more editable properties of an existing service
+        desk incident.
+      operationId: updateIncident
+      parameters:
+      - name: id
+        in: path
+        description: Unique incident identifier.
+        required: true
+        schema:
+          type: string
+        example: INC-1001
+      requestBody:
+        description: Incident properties to update.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateIncidentRequest"
+            examples:
+              Update incident:
+                description: Update incident
+                value:
+                  title: Unable to access payroll application
+                  priority: CRITICAL
+        required: true
+      responses:
+        "200":
+          description: Incident updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+              examples:
+                Updated incident:
+                  description: Updated incident
+                  value:
+                    id: INC-1001
+                    title: Unable to access payroll application
+                    description: User receives an access denied message when opening
+                      the payroll application.
+                    status: OPEN
+                    priority: CRITICAL
+                    category: ACCESS
+                    reportedBy:
+                      name: Jane Smith
+                      email: jane.smith@brilliant-mule.com
+                      phone: 425-555-0101
+                    assignedTo: null
+                    createdAt: 2026-08-25T15:00:00Z
+                    updatedAt: 2026-08-27T17:30:00Z
+                    comments: []
+        "400":
+          description: Request validation failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Validation failure:
+                  description: Validation failure
+                  value:
+                    type: about:blank
+                    title: Validation Failed
+                    status: 400
+                    detail: The request contains invalid data.
+                    instance: /api/incidents/INC-1001
+                    errors:
+                    - "title: must not be blank"
+        "404":
+          description: Incident not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              examples:
+                Incident not found:
+                  description: Incident not found
+                  value:
+                    type: about:blank
+                    title: Incident Not Found
+                    status: 404
+                    detail: Incident INC-9999 does not exist
+                    instance: /api/incidents/INC-9999
+components:
+  schemas:
+    CreateIncidentRequest:
+      required:
+      - category
+      - description
+      - priority
+      - reportedBy
+      - title
+      type: object
+      properties:
+        title:
+          minLength: 1
+          type: string
+          description: Short summary of the issue.
+          example: Unable to access payroll
+        description:
+          minLength: 1
+          type: string
+          description: Detailed description of the issue.
+          example: User receives an access denied message when opening the payroll
+            application.
+        priority:
+          type: string
+          description: Priority level assigned to a service desk incident.
+          example: HIGH
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        category:
+          type: string
+          description: Category used to classify a service desk incident.
+          example: ACCESS
+          enum:
+          - ACCESS
+          - HARDWARE
+          - NETWORK
+          - SOFTWARE
+          - OTHER
+        reportedBy:
+          $ref: "#/components/schemas/ReporterRequest"
+      description: Information required to create a new service desk incident.
+    ReporterRequest:
+      required:
+      - email
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Full name of the person reporting the incident.
+          example: Jane Smith
+        email:
+          minLength: 1
+          type: string
+          description: Email address of the person reporting the incident.
+          format: email
+          example: jane.smith@brilliant-mule.com
+        phone:
+          type: string
+          description: Phone number of the person reporting the incident.
+          example: 425-555-0101
+      description: Contact information for the person reporting an incident.
+    Incident:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier assigned to the incident.
+          example: INC-1001
+        title:
+          type: string
+          description: Short summary of the issue.
+          example: Unable to access payroll
+        description:
+          type: string
+          description: Detailed description of the issue.
+          example: User receives an access denied message when opening the payroll
+            application.
+        status:
+          type: string
+          description: Current lifecycle status of a service desk incident.
+          example: OPEN
+          enum:
+          - OPEN
+          - IN_PROGRESS
+          - RESOLVED
+          - CLOSED
+        priority:
+          type: string
+          description: Priority level assigned to a service desk incident.
+          example: HIGH
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        category:
+          type: string
+          description: Category used to classify a service desk incident.
+          example: ACCESS
+          enum:
+          - ACCESS
+          - HARDWARE
+          - NETWORK
+          - SOFTWARE
+          - OTHER
+        reportedBy:
+          $ref: "#/components/schemas/Reporter"
+        assignedTo:
+          type: string
+          description: Person or support team currently assigned to the incident.
+          example: Network Support
+        createdAt:
+          type: string
+          description: Date and time when the incident was created.
+          format: date-time
+          example: 2026-08-25T15:00:00Z
+        updatedAt:
+          type: string
+          description: Date and time when the incident was last updated.
+          format: date-time
+          example: 2026-08-25T16:30:00Z
+        comments:
+          type: array
+          description: Comments associated with the incident.
+          items:
+            $ref: "#/components/schemas/IncidentComment"
+      description: Represents a service desk incident and its current state.
+    IncidentComment:
+      type: object
+      properties:
+        author:
+          type: string
+          description: Name of the person who added the comment.
+          example: John Davis
+        text:
+          type: string
+          description: Text of the comment.
+          example: User access has been restored and verified.
+        createdAt:
+          type: string
+          description: Date and time when the comment was added.
+          format: date-time
+          example: 2026-08-25T17:15:00Z
+      description: Represents a comment added to a service desk incident.
+    Reporter:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the person who reported the incident.
+          example: Jane Smith
+        email:
+          type: string
+          description: Email address of the person who reported the incident.
+          example: jane.smith@brilliant-mule.com
+        phone:
+          type: string
+          description: Phone number of the person who reported the incident.
+          example: 425-555-0101
+      description: Contact information for the person who reported an incident.
+    ProblemDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+    AddIncidentCommentRequest:
+      required:
+      - author
+      - text
+      type: object
+      properties:
+        author:
+          minLength: 1
+          type: string
+          description: Name of the person adding the comment.
+          example: John Davis
+        text:
+          minLength: 1
+          type: string
+          description: Text of the comment.
+          example: User confirmed the issue is still occurring.
+      description: Information used to add a comment to a service desk incident.
+    AssignIncidentRequest:
+      required:
+      - assignedTo
+      type: object
+      properties:
+        assignedTo:
+          minLength: 1
+          type: string
+          description: Person or support team to assign the incident to.
+          example: Network Support
+      description: Information used to assign a service desk incident.
+    UpdateIncidentRequest:
+      type: object
+      properties:
+        title:
+          pattern: "[\\s\\S]*\\S[\\s\\S]*"
+          type: string
+          description: Updated short summary of the issue.
+          example: Unable to access payroll application
+        description:
+          pattern: "[\\s\\S]*\\S[\\s\\S]*"
+          type: string
+          description: Updated detailed description of the issue.
+          example: User receives an access denied message after authenticating to
+            the payroll application.
+        priority:
+          type: string
+          description: Priority level assigned to a service desk incident.
+          example: CRITICAL
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        category:
+          type: string
+          description: Category used to classify a service desk incident.
+          example: ACCESS
+          enum:
+          - ACCESS
+          - HARDWARE
+          - NETWORK
+          - SOFTWARE
+          - OTHER
+      description: Information used to update an existing service desk incident.
