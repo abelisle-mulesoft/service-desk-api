@@ -19,7 +19,7 @@ The API serves as a reusable backend for exploring MuleSoft API management and a
 : Reusable Bruno collection for exploring and testing the Brilliant Mule Service Desk API and its gateway-managed endpoints.
 
 `openapi/`
-: OpenAPI specification for the Brilliant Mule Service Desk API.
+: OpenAPI Specification for the Brilliant Mule Service Desk API (`openapi.yaml`).
 
 `src/`
 : Application source code and tests.
@@ -43,7 +43,7 @@ The Brilliant Mule Service Desk API was implemented using a bottom-up approachâ€
 
 2. Change to the root directory of the project.
 
-3. Optionally, compile this project as a smoke test.
+3. Optionally, compile the project.
    - On Linux or macOS:
 
        ```sh
@@ -69,7 +69,7 @@ The Brilliant Mule Service Desk API was implemented using a bottom-up approachâ€
        mvnw.cmd test
        ```
 
-5. Run the project
+5. Run the project.
    - On Linux or macOS:
 
        ```sh
