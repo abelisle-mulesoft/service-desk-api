@@ -382,6 +382,7 @@ public class IncidentController {
      * @return matching incidents; never {@code null}
      */
     @Operation(
+            operationId = "list_incidents",
             summary = "List incidents",
             description = "Returns service desk incidents, optionally filtered by status, priority, category, or assignee."
     )
@@ -451,6 +452,7 @@ public class IncidentController {
      * @return the matching incident
      */
     @Operation(
+            operationId = "get_incident",
             summary = "Get an incident",
             description = "Returns a service desk incident by its identifier."
     )
@@ -505,6 +507,7 @@ public class IncidentController {
      * @return the created incident with server-assigned fields populated
      */
     @Operation(
+            operationId = "create_incident",
             summary = "Create an incident",
             description = "Creates a new service desk incident."
     )
@@ -573,6 +576,7 @@ public class IncidentController {
      * @return the updated and persisted incident
      */
     @Operation(
+            operationId = "update_incident",
             summary = "Update an incident",
             description = "Updates one or more editable properties of an existing service desk incident."
     )
@@ -656,6 +660,7 @@ public class IncidentController {
      * @return the updated and persisted incident
      */
     @Operation(
+            operationId = "assign_incident",
             summary = "Assign an incident",
             description = "Assigns an existing service desk incident to a person or support team."
     )
@@ -740,6 +745,7 @@ public class IncidentController {
      * @return the updated and persisted incident
      */
     @Operation(
+            operationId = "add_incident_comment",
             summary = "Add an incident comment",
             description = "Adds a comment to an existing service desk incident."
     )
@@ -824,6 +830,7 @@ public class IncidentController {
      * @return the resolved incident
      */
     @Operation(
+            operationId = "resolve_incident",
             summary = "Resolve an incident",
             description = "Marks an existing service desk incident as resolved."
     )
@@ -888,6 +895,7 @@ public class IncidentController {
      * @param id the incident identifier (for example, {@code INC-1001})
      */
     @Operation(
+            operationId = "delete_incident",
             summary = "Delete an incident",
             description = "Permanently deletes an existing service desk incident."
     )

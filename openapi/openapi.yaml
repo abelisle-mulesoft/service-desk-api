@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   version: 1.0.0
 servers:
-- url: http://localhost:8080
+- url: http://ec2-18-221-214-23.us-east-2.compute.amazonaws.com:8080
   description: Generated server url
 tags:
 - name: Incidents
@@ -23,7 +23,7 @@ paths:
       summary: List incidents
       description: "Returns service desk incidents, optionally filtered by status,\
         \ priority, category, or assignee."
-      operationId: getIncidents
+      operationId: list_incidents
       parameters:
       - name: status
         in: query
@@ -139,7 +139,7 @@ paths:
       - Incidents
       summary: Create an incident
       description: Creates a new service desk incident.
-      operationId: createIncident
+      operationId: create_incident
       requestBody:
         description: Incident to create.
         content:
@@ -210,7 +210,7 @@ paths:
       - Incidents
       summary: Resolve an incident
       description: Marks an existing service desk incident as resolved.
-      operationId: resolveIncident
+      operationId: resolve_incident
       parameters:
       - name: id
         in: path
@@ -281,7 +281,7 @@ paths:
       - Incidents
       summary: Add an incident comment
       description: Adds a comment to an existing service desk incident.
-      operationId: addIncidentComment
+      operationId: add_incident_comment
       parameters:
       - name: id
         in: path
@@ -372,7 +372,7 @@ paths:
       summary: Assign an incident
       description: Assigns an existing service desk incident to a person or support
         team.
-      operationId: assignIncident
+      operationId: assign_incident
       parameters:
       - name: id
         in: path
@@ -457,7 +457,7 @@ paths:
       - Incidents
       summary: Get an incident
       description: Returns a service desk incident by its identifier.
-      operationId: getIncident
+      operationId: get_incident
       parameters:
       - name: id
         in: path
@@ -512,7 +512,7 @@ paths:
       - Incidents
       summary: Delete an incident
       description: Permanently deletes an existing service desk incident.
-      operationId: deleteIncident
+      operationId: delete_incident
       parameters:
       - name: id
         in: path
@@ -545,7 +545,7 @@ paths:
       summary: Update an incident
       description: Updates one or more editable properties of an existing service
         desk incident.
-      operationId: updateIncident
+      operationId: update_incident
       parameters:
       - name: id
         in: path
