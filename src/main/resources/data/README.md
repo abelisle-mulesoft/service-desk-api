@@ -44,4 +44,3 @@ When extending the dataset:
 - Incident identifiers do not need to be contiguous.
 - Treat the numeric portion of the identifier as the ordering and sequencing value.
 - Ensure the file remains valid JSON that can be deserialized into the incident model.
-

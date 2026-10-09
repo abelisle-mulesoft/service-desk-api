@@ -78,12 +78,12 @@ http://localhost:8080
 
 The application includes canonical seed incidents used by requests that require a known incident state or data characteristic.
 
-| Collection variable        | Incident ID | Purpose |
-| -------------------------- | ----------- | ------- |
-| `openIncidentId`           | `INC-1001`  | OPEN incident used by scenarios requiring an open incident |
+| Collection variable        | Incident ID | Purpose                                                             |
+| -------------------------- | ----------- | ------------------------------------------------------------------- |
+| `openIncidentId`           | `INC-1001`  | OPEN incident used by scenarios requiring an open incident          |
 | `resolvedIncidentId`       | `INC-1004`  | RESOLVED incident used for resolved-state and idempotency scenarios |
-| `commentHistoryIncidentId` | `INC-1013`  | Incident with a large comment history |
-| `closedIncidentId`         | `INC-1014`  | CLOSED incident used for state-validation scenarios |
+| `commentHistoryIncidentId` | `INC-1013`  | Incident with a large comment history                               |
+| `closedIncidentId`         | `INC-1014`  | CLOSED incident used for state-validation scenarios                 |
 
 These identifiers are defined as collection variables in `opencollection.yml` so requests do not need to hard-code the seed incident IDs.
 
