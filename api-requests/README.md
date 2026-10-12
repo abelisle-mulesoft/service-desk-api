@@ -139,3 +139,7 @@ The mutating request sequence is:
 Canonical seed incidents are used primarily for read-only requests and scenarios that specifically require their known state or data characteristics.
 
 This create/mutate/delete strategy keeps the collection reusable across local and remote environments and prevents repeated testing from gradually changing the seed data on a long-running server.
+
+---
+
+Copyright © 2026 Alan Belisle. Licensed under the [Apache License 2.0](/LICENSE.txt).

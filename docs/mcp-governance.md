@@ -342,3 +342,7 @@ The experiments also identified several implementation details that are importan
 - Treat unexpected policy behavior as an experimental result rather than presuming policy ineffectiveness. The Remove Nulls behavior remains intentionally documented as unresolved.
 
 These results establish a practical governance baseline for the Brilliant Mule Service Desk MCP implementation and provide a foundation for subsequent experiments in authorization, data governance, native MCP server development, and agent-to-agent interactions.
+
+---
+
+Copyright © 2026 Alan Belisle. Licensed under the [Apache License 2.0](/LICENSE.txt).
