@@ -1,8 +1,6 @@
 # API Requests
 
-This directory contains a reusable collection of requests for exploring and testing the Brilliant Mule Service Desk API and its gateway-managed endpoints.
-
-The collection is designed to be used with [Bruno](https://www.usebruno.com/) and uses the [OpenCollection](https://www.opencollection.com/) format. The request artifacts are stored as text files alongside the application source so they can be versioned with the API.
+This directory contains a reusable collection of requests for exploring and testing the Brilliant Mule Service Desk API and its gateway-managed endpoints. The collection is designed to be used with [Bruno](https://www.usebruno.com/) and uses the [OpenCollection](https://www.opencollection.com/) format. The request artifacts are stored as text files alongside the application source so they can be versioned with the API.
 
 ## Using the Collection
 
@@ -42,11 +40,7 @@ Select `local` in Bruno when running the API from the local development environm
 
 ### Shared and Developer-Specific Environments
 
-Environment definitions that are useful to everyone using the repository may be committed to Git.
-
-Developer-specific environment files should remain local and be excluded from Git. These may contain endpoints or other configuration that applies only to a particular developer or deployment.
-
-Where appropriate, the repository provides `.example.yml` environment files that document the required variables without containing developer-specific values.
+Environment definitions that are useful to everyone using the repository may be committed to Git. Developer-specific environment files should remain local and be excluded from Git. These may contain endpoints or other configuration that applies only to a particular developer or deployment. Where appropriate, the repository provides `.example.yml` environment files that document the required variables without containing developer-specific values.
 
 For example:
 
@@ -62,11 +56,11 @@ cp env-aws-dev.example.yml env-aws-dev.yml
 
 Then update the copied file with the endpoint for your environment.
 
-The same approach can be used for additional environments, such as Omni Gateway, test, QA, or other deployment targets.
+The same approach can be used for additional environments, including test, QA, or other deployments accessed directly or through Anypoint Omni Gateway.
 
 ### `baseUrl`
 
-All requests use the `baseUrl` environment variable to identify the target Service Desk API. The value depends on the selected environment. For a local or direct AWS deployment, `baseUrl` points directly to the Service Desk API. When the API is managed through a gateway, `baseUrl` points to the gateway endpoint and includes any API base path required by the gateway configuration. Changing the selected environment changes `baseUrl` without requiring changes to individual requests.
+All requests use the `baseUrl` environment variable to identify the target Service Desk API endpoint. The value depends on the selected environment. For a local or direct AWS deployment, `baseUrl` points directly to the Service Desk API endpoint. When the API is managed through a gateway, `baseUrl` points to the gateway endpoint and includes any API base path required by the gateway configuration. Changing the selected environment changes `baseUrl` without requiring changes to individual requests.
 
 For example:
 
@@ -89,23 +83,17 @@ These identifiers are defined as collection variables in `opencollection.yml` so
 
 ### Temporary Incident
 
-Mutating requests use the `createdIncidentId` collection variable to reference a temporary incident created by the `Create incident` request.
-
-The `Create incident` request sets `createdIncidentId` to the generated incident ID. Subsequent mutating requests use this variable instead of modifying canonical seed incidents. The `Delete incident` request removes the temporary incident when testing is complete.
+Mutating requests use the `createdIncidentId` collection variable to reference a temporary incident created by the `Create incident` request. The `Create incident` request sets `createdIncidentId` to the generated incident ID. Subsequent mutating requests use this variable instead of modifying canonical seed incidents. The `Delete incident` request removes the temporary incident when testing is complete.
 
 ## Request Categories
 
 ### Incidents
 
-The `incidents` directory contains requests for the normal Service Desk API operations, including listing, retrieving, filtering, creating, updating, assigning, commenting on, resolving, and deleting incidents.
-
-It also contains behavioral scenarios where a successful response depends on a particular incident state, such as resolving an already-resolved incident.
+The `incidents` directory contains requests for the normal Service Desk API operations, including listing, retrieving, filtering, creating, updating, assigning, commenting on, resolving, and deleting incidents. It also contains behavioral scenarios where a successful response depends on a particular incident state, such as resolving an already-resolved incident.
 
 ### Gateway
 
-The `gateway` directory contains requests for validating behavior introduced by an API gateway rather than by the Service Desk API itself.
-
-The current requests validate:
+The `gateway` directory contains requests for validating behavior introduced by an API gateway rather than by the Service Desk API itself. The current requests validate:
 
 - Requests with valid client credentials.
 - Requests with missing client credentials.
@@ -128,17 +116,13 @@ These requests make it easy to verify the API's `ProblemDetail` error responses 
 
 ## Repeatable Mutating Scenarios
 
-Requests that modify incident data are designed to be repeatable against a long-running API instance without requiring the application to be restarted to restore seed data.
-
-The mutating request sequence is:
+Requests that modify incident data are designed to be repeatable against a long-running API instance without requiring the application to be restarted to restore seed data. The mutating request sequence is:
 
 1. Create a temporary incident and store its generated ID in `createdIncidentId`.
 2. Perform update, assignment, comment, and resolution operations against the temporary incident.
 3. Delete the temporary incident when testing is complete.
 
-Canonical seed incidents are used primarily for read-only requests and scenarios that specifically require their known state or data characteristics.
-
-This create/mutate/delete strategy keeps the collection reusable across local and remote environments and prevents repeated testing from gradually changing the seed data on a long-running server.
+Canonical seed incidents are used primarily for read-only requests and scenarios that specifically require their known state or data characteristics. This create/mutate/delete strategy keeps the collection reusable across local and remote environments and prevents repeated testing from gradually changing the seed data on a long-running server.
 
 ---
 

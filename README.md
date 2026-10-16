@@ -1,27 +1,27 @@
 # Brilliant Mule Service Desk API
 
-This repository contains a simple Spring Boot REST API that simulates an IT service desk for Brilliant Mule, a fictitious company. It is primarily intended to explore and demonstrate API and agentic management and governance capabilities, including exposing REST API operations as MCP tools using the [MuleSoft MCP Bridge](https://www.mulesoft.com/platform/ai/model-context-protocol/mcp-bridge-tour).
+This repository contains a simple Spring Boot REST API that simulates an IT service desk for Brilliant Mule, a fictitious company. It was developed as a reusable reference application for exploring and demonstrating MuleSoft’s agentic management, governance, and interoperability capabilities, including Model Context Protocol (MCP), Agent-to-Agent (A2A) communication, and MuleSoft Agent Fabric.
 
 The Brilliant Mule Service Desk API provides operations to create, retrieve, search, update, assign, comment on, resolve, and delete incidents. The implementation is deliberately simple and loads data in memory rather than using a persistent database.
 
 ## MuleSoft API and Agentic Exploration
 
-The Brilliant Mule Service Desk API serves as a reusable component for exploring MuleSoft’s management and governance capabilities for APIs and agentic systems. It has been used to explore the following scenarios:
+The Brilliant Mule Service Desk API serves as a reusable component for exploring MuleSoft’s API and agentic management, governance, and interoperability capabilities. It supports experiments involving:
 
-- Managing the REST API with Anypoint Omni Gateway.
-- Exposing selected REST operations as MCP tools using MCP Bridge.
-- Consuming the MCP tools from MCP-capable AI clients.
-- Exploring MCP access, tool, and data governance policies.
+- Managing REST APIs with Anypoint Omni Gateway.
+- Exposing REST operations as MCP tools using MuleSoft MCP Bridge.
+- Exploring MCP authentication, authorization, and governance policies.
+- Integrating MCP capabilities with AI clients and agents across different cloud ecosystems.
+- Exploring agent discovery, management, governance, and observability with MuleSoft Agent Fabric.
+- Exploring Agent-to-Agent (A2A) communication and governance.
+- Implementing and comparing native MCP servers with MCP Bridge.
 
-Refer to [MCP Governance with MuleSoft Omni Gateway](docs/mcp-governance.md) for a summary of the MCP management and governance experiments, including key insights gained during the process.
+This repository contains the Service Desk API implementation, deployment, and REST API testing. MCP Bridge configuration, MCP management and governance policies, and related experiments are maintained separately in the [mcp-governance](https://github.com/abelisle-mulesoft/mcp-governance) repository.
 
 ## Repository Structure
 
 `api-requests/`
 : Reusable Bruno collection for exploring and testing the Brilliant Mule Service Desk API and its gateway-managed endpoints.
-
-`docs/`
-: Documentation and findings from MCP management and governance experiments.
 
 `openapi/`
 : OpenAPI Specification for the Brilliant Mule Service Desk API (`openapi.yaml`).
